@@ -8,34 +8,24 @@ document.getElementById("Menu").addEventListener("click", function() {
   document.getElementById("Icon").classList.toggle("gg-menu");
 });
 
-function buscarInformacion() {
-  var codigoPostal = document.getElementById('codigoPostal').value;
+// Verificar si el navegador soporta la geolocalización
+if ("geolocation" in navigator) {
+  var geolocationBtn = document.getElementById("geolocationBtn");
 
-  // Llamada a la API de codigos postales
-  fetch('https://apicp.softfortoday.com/api/v1/estados/codigo_postal/' + codigoPostal, {
-    method: 'GET',
-    mode: 'cors'
-  })
-    .then(response => response.json())
-    .then(data => {
+  // Manejar el clic en el botón
+  geolocationBtn.addEventListener("click", function() {
+      navigator.geolocation.getCurrentPosition(function(position) {
+          // Obtener la latitud y longitud
+          var latitude = position.coords.latitude;
+          var longitude = position.coords.longitude;
 
-      //Limpiar Inputs anteriores
-      var estadoSelect = document.getElementById('estado');
-      estadoSelect.innerHTML = '';
-      var coloniaSelect = document.getElementById('colonia');
-      coloniaSelect.innerHTML = '';
+          // Generar el enlace de Google Maps
+          var googleMapsLink = "https://www.google.com/maps?q=" + latitude + "," + longitude;
 
-      // Rellenar el select de estados
-      var estados = data.respuesta;
-      estados.forEach(function(codigo_estado) {
-        var option = document.createElement('option');
-        option.value = codigo_estado;
-        option.textContent = codigo_estado;
-        estadoSelect.appendChild(option);
+          // Abrir el enlace en una nueva pestaña
+          window.open(googleMapsLink, "_blank");
       });
-
-    })
-    .catch(error => {
-      console.log('Error al obtener la información:', error);
-    });
+  });
+} else {
+  console.log("Geolocalización no está disponible en este navegador");
 }
