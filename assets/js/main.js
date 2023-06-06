@@ -29,3 +29,42 @@ if ("geolocation" in navigator) {
 } else {
   console.log("Geolocalización no está disponible en este navegador");
 }
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  // Obtener el campo de código postal y registrar el evento de cambio
+  var cpInput = document.getElementById('cp');
+  cpInput.addEventListener('change', obtenerInformacionCP);
+});
+
+function obtenerInformacionCP() {
+  
+  var cp = this.value;
+  if (cp.length === 5) {
+  // Realizar la solicitud AJAX al archivo PHP
+  fetch('functions/cp.php', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+    },
+    body: 'cp=' + encodeURIComponent(cp)
+  })
+  .then(function(response) {
+    if (response.ok) {
+      return response.json();
+    } else {
+      throw new Error('Error al obtener la información del código postal.');
+    }
+  })
+  .then(function(data) {
+    // Actualizar los campos de colonia, localidad y estado con la información recibida
+    document.getElementById('colonia').value = data.colonia;
+    document.getElementById('localidad').value = data.municipio;
+    document.getElementById('estado').value = data.estado;
+  })
+  .catch(function(error) {
+    // Manejar el error si ocurre
+    alert(error.message);
+  });
+}
+}
