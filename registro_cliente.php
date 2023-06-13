@@ -7,7 +7,7 @@
         <h1 class="title upper text-center">Registro de Cliente</h1>
 
         <form action="" method="post" class="registro m-center">
-            <fieldset class="br-1">
+            <fieldset class="br-1 registro__grupo">
                 <legend>Datos del Cliente:</legend>
                 <div class="d-flex aling-center">
                     <label for="cliente" class="mr-1 bold">Nombre del Negocio:</label>
@@ -42,9 +42,10 @@
                 </div>
                 <div class="d-flex aling-center mt-1">
                     <label for="localidad" class="mr-1 bold">Localidad:</label>
-                    <input type="text" class="flex-1" id="localidad" name="localidad" placeholder="Email">
+                    <input type="text" class="flex-1" id="localidad" name="localidad" placeholder="">
                 </div>
             </fieldset>
+            <input type="submit" value="Enviar">
         </form>
     </main>
 
