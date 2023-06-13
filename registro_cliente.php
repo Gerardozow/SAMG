@@ -47,13 +47,15 @@ include_once('includes/config.php');
                 
                 <label for="estado" class="registro__label">Estado:</label>
                 <select name="estado" id=estado class="registro__select">
-                    <option value="" disabled selected="true">Selecciona un estado</option>
+                    <option value="0" disabled selected="true">Selecciona un estado</option>
                     <?php 
-                    $query = "SELECT DISTINCT estado from cp ORDER BY estado ASC";
+                    $query = "SELECT * from estados";
                     $resultado = mysqli_query($conexion, $query);
                     if (mysqli_num_rows($resultado) > 0) {
                         while($fila=mysqli_fetch_array($resultado)){
-                            echo "<option>".$estado = $fila['estado']."</option>";
+                            $estado = $fila['estado'];
+                            $id = $fila['id'];
+                            echo "<option value=".$id.">".$estado."</option>";
                         }
                     }
 
