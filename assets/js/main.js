@@ -14,6 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.getElementById("verificar").addEventListener('click', function(event) {
       event.preventDefault();
 
+
+
       var cp = document.getElementById('cp').value;
       var xhr = new XMLHttpRequest();
 
@@ -28,6 +30,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 selectAsentamiento.innerHTML = '';
                 selectLocalidad.innerHTML = '';
                 selectEstado.innerHTML = '';
+                selectAsentamiento.disabled = false;
+                selectLocalidad.disabled = false;
+                selectEstado.disabled = false;
 
                 // Agregar las opciones al select de asentamiento
                 response.asentamiento.forEach(function(response){

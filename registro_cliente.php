@@ -43,18 +43,17 @@ include_once('includes/config.php');
                 </div>
 
                 <label for="colonia" class="registro__label">Colonia:</label>
-                <select name="colonia" id="colonia" class="registro__select" >
+                <select name="colonia" id="colonia" class="registro__select" disabled>
                     <option value="0" disabled selected="true"></option>
                 </select>
 
                 <label for="localidad" class="registro__label">Localidad:</label>
-                <select name="localidad" id="localidad" class="registro__select" >
+                <select name="localidad" id="localidad" class="registro__select" disabled>
                     <option value="0" disabled selected="true"></option>
                 </select>
                 
                 <label for="estado" class="registro__label">Estado:</label>
-                <select name="estado" id="estado" class="registro__select" >
-                    <option value="0" disabled selected="true"></option>
+                <select name="estado" id="estado" class="registro__select" disabled>
                 </select>
 
 
