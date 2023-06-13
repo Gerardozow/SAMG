@@ -36,17 +36,24 @@ include_once('includes/config.php');
                 <label for="numero" class="registro__label">Número:</label>
                 <input type="text" id="numero" name="numero" class="registro__input"  required>
                 
-                <label for="colonia" class="registro__label">Colonia:</label>
-                <input type="text" id="colonia" name="colonia" class="registro__input"  required>
-
                 <label for="cp" class="registro__label">Código Postal:</label>
-                <input type="text" id="cp" name="cp" class="registro__input"  required>
+                <div class="d-flex aling-center">
+                    <input type="text" id="cp" name="cp" class="registro__input mr-1"  required>
+                    <input type="submit" value="verificar" id="verificar" class="block btn mb-1">
+                </div>
+
+                <label for="colonia" class="registro__label">Colonia:</label>
+                <select name="colonia" id="colonia" class="registro__select" >
+                    <option value="0" disabled selected="true"></option>
+                </select>
 
                 <label for="localidad" class="registro__label">Localidad:</label>
-                <input type="text" id="localidad" name="localidad" class="registro__input"  required>
+                <select name="localidad" id="localidad" class="registro__select" >
+                    <option value="0" disabled selected="true"></option>
+                </select>
                 
                 <label for="estado" class="registro__label">Estado:</label>
-                <select name="estado" id=estado class="registro__select">
+                <select name="estado" id="estado" class="registro__select">
                     <option value="0" disabled selected="true">Selecciona un estado</option>
                     <?php 
                     $query = "SELECT * from estados";

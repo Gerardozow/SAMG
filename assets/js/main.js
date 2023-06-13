@@ -7,3 +7,52 @@ document.getElementById("Menu").addEventListener("click", function() {
   document.getElementById("Icon").classList.toggle("gg-close");
   document.getElementById("Icon").classList.toggle("gg-menu");
 });
+
+
+//Realizar busqueda de CP
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById("verificar").addEventListener('click', function(event) {
+      event.preventDefault();
+
+      var cp = document.getElementById('cp').value;
+      var xhr = new XMLHttpRequest();
+
+      xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                console.log(response);
+                var selectAsentamiento = document.getElementById('colonia');
+                var selectLocalidad = document.getElementById('localidad');
+                selectAsentamiento.innerHTML = '';
+                selectLocalidad.innerHTML = '';
+
+                // Agregar las opciones al select de asentamiento
+                response.asentamiento.forEach(function(response){
+                  var optionAsentamiento = document.createElement('option');
+                  optionAsentamiento.value = response;
+                  optionAsentamiento.text = response;
+                  selectAsentamiento.appendChild(optionAsentamiento);
+                });
+
+                // Agregar las opciones únicas al select de localidad
+                var uniqueLocalidades = new Set(response.localidad);
+                var localidadesArray = [...uniqueLocalidades];
+                localidadesArray.forEach(function(localidad) {
+                  var optionLocalidad = document.createElement('option');
+                  optionLocalidad.value = localidad;
+                  optionLocalidad.text = localidad;
+                  selectLocalidad.appendChild(optionLocalidad);
+                })
+                                
+            } else {
+                console.log('Error en la solicitud AJAX');
+            }
+        }
+    };
+
+      xhr.open('POST', 'functions/consulta_localidad.php', true);
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.send('verificar=true&cp=' + encodeURIComponent(cp));
+  });
+});
