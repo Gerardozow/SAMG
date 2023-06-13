@@ -24,8 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log(response);
                 var selectAsentamiento = document.getElementById('colonia');
                 var selectLocalidad = document.getElementById('localidad');
+                var selectEstado = document.getElementById('estado');
                 selectAsentamiento.innerHTML = '';
                 selectLocalidad.innerHTML = '';
+                selectEstado.innerHTML = '';
 
                 // Agregar las opciones al select de asentamiento
                 response.asentamiento.forEach(function(response){
@@ -44,7 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
                   optionLocalidad.text = localidad;
                   selectLocalidad.appendChild(optionLocalidad);
                 })
-                                
+                
+                
+                // Agregar las opciones únicas al select de Estado
+                var uniqueEstado = new Set(response.estado);
+                var EstadoArray = [...uniqueEstado];
+                EstadoArray.forEach(function(estado) {
+                  var optionEstado = document.createElement('option');
+                  optionEstado.value = estado;
+                  optionEstado.text = estado;
+                  selectEstado.appendChild(optionEstado);
+                })
             } else {
                 console.log('Error en la solicitud AJAX');
             }

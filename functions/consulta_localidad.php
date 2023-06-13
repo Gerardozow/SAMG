@@ -6,7 +6,7 @@ if (isset($_POST['verificar'])) {
 
     // Realizar la consulta a la base de datos y obtener los resultados
     // Supongamos que tienes una tabla llamada 'opciones' con una columna 'valor'
-    $query = "SELECT asentamiento, municipio, estado FROM cp WHERE cp = $cp";
+    $query = "SELECT asentamiento, ciudad, estado FROM cp WHERE cp = $cp";
     $resultado = mysqli_query($conexion, $query);
 
     // Verificar si se encontraron resultados
@@ -17,7 +17,7 @@ if (isset($_POST['verificar'])) {
         $estado = array();
         while($fila = mysqli_fetch_assoc($resultado)){
         $asentamiento[] = $fila['asentamiento'];
-        $localidad[] = $fila['municipio'];
+        $localidad[] = $fila['ciudad'];
         $estado[]=$fila['estado'];
     };
 
