@@ -20,7 +20,7 @@ $resultado = mysqli_query($conexion, $query);
 // Verificar si se encontró información para el código postal ingresado
 if (mysqli_num_rows($resultado) > 0) {
     // Obtener los valores de colonia, localidad y estado
-    $fila = mysqli_fetch_assoc($resultado);
+    $fila = mysqli_fetch_array($resultado);
     $colonia = $fila['asentamiento'];
     $municipio = $fila['municipio'];
     $estado = $fila['estado'];

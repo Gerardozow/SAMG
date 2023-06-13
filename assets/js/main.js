@@ -31,40 +31,40 @@ if ("geolocation" in navigator) {
 }
 
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Obtener el campo de código postal y registrar el evento de cambio
-  var cpInput = document.getElementById('cp');
-  cpInput.addEventListener('change', obtenerInformacionCP);
-});
 
-function obtenerInformacionCP() {
+
+
+function obtenerDatosCP() {
+  var codigoPostal = document.getElementById('codigo_postal').value;
+
+  // Crear un objeto XMLHttpRequest
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'functions/cp.php', true);
+  xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   
-  var cp = this.value;
-  if (cp.length === 5) {
-  // Realizar la solicitud AJAX al archivo PHP
-  fetch('functions/cp.php', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: 'cp=' + encodeURIComponent(cp)
-  })
-  .then(function(response) {
-    if (response.ok) {
-      return response.json();
-    } else {
-      throw new Error('Error al obtener la información del código postal.');
-    }
-  })
-  .then(function(data) {
-    // Actualizar los campos de colonia, localidad y estado con la información recibida
-    document.getElementById('colonia').value = data.colonia;
-    document.getElementById('localidad').value = data.municipio;
-    document.getElementById('estado').value = data.estado;
-  })
-  .catch(function(error) {
-    // Manejar el error si ocurre
-    alert(error.message);
-  });
-}
+  // Configurar la función de respuesta
+  xhr.onload = function() {
+      if (xhr.status === 200) {
+          var response = JSON.parse(xhr.responseText);
+          if (response) {
+              console.log(response)
+
+              //Limpiar Selects
+              var coloniaSelect = document.getElementById('colonia');
+              coloniaSelect.innerHTML = '';
+
+              response.colonia.forEach(function(colonia) {
+                  var option = document.createElement('option');
+                  option.value = colonia;
+                  option.text = colonia;
+                  coloniaSelect.appendChild(option);
+              });
+
+
+          }
+      }
+  };
+  
+  // Enviar la solicitud
+  xhr.send('cp=' + encodeURIComponent(codigoPostal));
 }
