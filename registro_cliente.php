@@ -62,11 +62,7 @@ include_once('includes/config.php');
                     ?>
                 </select>
 
-
             </fieldset>
-            
-
-            
 
             <input type="submit" value="Enviar" class="block w100 btn-submit mt-1">
         </form>
