@@ -1,3 +1,7 @@
+<?php
+include_once('includes/config.php');
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <?php include_once('views/head.php')?>
@@ -40,9 +44,21 @@
 
                 <label for="localidad" class="registro__label">Localidad:</label>
                 <input type="text" id="localidad" name="localidad" class="registro__input"  required>
-
+                
                 <label for="estado" class="registro__label">Estado:</label>
-                <input type="text" id="estado" name="estado" class="registro__input"  required>
+                <select name="estado" id=estado class="registro__select">
+                    <option value="" disabled selected="true">Selecciona un estado</option>
+                    <?php 
+                    $query = "SELECT DISTINCT estado from cp ORDER BY estado ASC";
+                    $resultado = mysqli_query($conexion, $query);
+                    if (mysqli_num_rows($resultado) > 0) {
+                        while($fila=mysqli_fetch_array($resultado)){
+                            echo "<option>".$estado = $fila['estado']."</option>";
+                        }
+                    }
+
+                    ?>
+                </select>
 
 
             </fieldset>
