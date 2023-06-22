@@ -9,8 +9,9 @@
             </div>
             <nav class="header__nav" id="Nav">
                 <a href="#" class="header__nav__link">Home</a>
-                <a href="#" class="header__nav__link">Regristro Cliente</a>
+                <a href="registro_cliente.php" class="header__nav__link">Regristro Cliente</a>
                 <a href="#" class="header__nav__link">Regristro Venta</a>
+                <a href="cerrar_sesion.php" class="header__nav__link">Cerrar Sesion</a>
             </nav>
         </div>
     </header>
