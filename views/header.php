@@ -8,7 +8,7 @@
                 <i id="Icon" class="gg-menu text-center m-center"></i>
             </div>
             <nav class="header__nav" id="Nav">
-                <a href="#" class="header__nav__link">Home</a>
+                <a href="home.php" class="header__nav__link">Home</a>
                 <a href="registro_cliente.php" class="header__nav__link">Regristro Cliente</a>
                 <a href="#" class="header__nav__link">Regristro Venta</a>
                 <a href="cerrar_sesion.php" class="header__nav__link">Cerrar Sesion</a>
