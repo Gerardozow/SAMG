@@ -19,5 +19,11 @@ if (!isset($_SESSION['id'])) {
 }}
 
 
+function permisosadm(){
+    if($_SESSION['permisos'] != 1 ){
+        header("Location: index.php");
+        exit();
+    }
+}
 
 ?>

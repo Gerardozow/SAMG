@@ -1,7 +1,7 @@
 <?php
 include_once('includes/access.php');
+include_once('includes/config.php');
 login();
-
 ?>
 
 <?php
@@ -11,21 +11,44 @@ if (isset($_POST['Ingresar'])) {
     $username = $_POST['usuario'];
     $password = $_POST['password'];
 
-    // Aquí debes implementar la lógica para verificar las credenciales en tu base de datos
-    // Por simplicidad, se utilizará una verificación básica en este ejemplo
-    if ($username === 'admin' && $password === '123456') {
-        // Credenciales válidas, iniciar sesión
-        $_SESSION['id'] = 1;    
-        $_SESSION['username'] = $username;
+    // Prevenir ataques de inyección SQL
+    $username = mysqli_real_escape_string($conexion, $username);
+    $password = mysqli_real_escape_string($conexion, $password);
 
-        // Redirigir al usuario a la página de inicio
-        header("Location: home.php");
-        exit();
+    // Construir la consulta SQL
+    $query = "SELECT * FROM usuarios WHERE nombre_usuario = '$username'";
+
+    // Ejecutar la consulta
+    $result = mysqli_query($conexion, $query);
+
+    // Verificar el resultado de la consulta
+    if (mysqli_num_rows($result) === 1) {
+        // Obtener el registro de usuario de la base de datos
+        $row = mysqli_fetch_assoc($result);
+        $hashedPassword = $row['password'];
+
+        // Verificar si la contraseña ingresada coincide con la contraseña encriptada
+        if (password_verify($password, $hashedPassword)) {
+            // Credenciales válidas, iniciar sesión
+            $_SESSION['id'] = $row['id'];
+            $_SESSION['username'] = $row['nombre_usuario'];
+            $_SESSION['permisos'] = $row['permisos'];
+            
+            // Redirigir al usuario a la página de inicio
+            header("Location: home.php");
+            exit();
+        } else {
+            // Contraseña inválida, mostrar mensaje de error
+            $error = "Nombre de usuario o contraseña incorrectos.";
+        }
     } else {
-        // Credenciales inválidas, mostrar mensaje de error
+        // Usuario no encontrado, mostrar mensaje de error
         $error = "Nombre de usuario o contraseña incorrectos.";
     }
 }
+
+// Cerrar la conexión a la base de datos
+mysqli_close($conexion);
 ?>
 
 
