@@ -1,4 +1,5 @@
 <?php
+$title = "Registro de Cliente - MAUGER";
 include_once('includes/config.php');
 ?>
 

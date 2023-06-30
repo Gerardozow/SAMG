@@ -1,4 +1,5 @@
 <?php
+$title = "Inicio de Sesion";
 include_once('includes/access.php');
 include_once('includes/config.php');
 login();

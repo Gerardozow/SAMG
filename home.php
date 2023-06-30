@@ -1,4 +1,5 @@
 <?php
+$title="Home";
 include_once('includes/access.php');
 permisos();
 ?>

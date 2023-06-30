@@ -1,4 +1,5 @@
 <?php
+$title ="Cambio de contraseña";
 include_once('includes/access.php');
 permisosadm();
 ?>

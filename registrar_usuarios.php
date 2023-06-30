@@ -1,4 +1,5 @@
 <?php
+$title="Registro de Usuario";
 include_once('includes/access.php');
 permisos();
 ?>
